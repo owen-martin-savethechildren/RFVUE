@@ -1,0 +1,116 @@
+﻿
+
+
+.rv-group {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+    .rv-group .ico {
+        font-size: 75px;
+        line-height: 0;
+        color: #646c9a;
+    }
+
+    .rv-group .info {
+        line-height: 1.8;
+        font-size: 14px;
+    }
+
+    .rv-group .name {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .rv-group .type {
+    }
+
+    .rv-group .active {
+        text-align: end;
+    }
+
+    .rv-group .p-bar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .rv-group .progress, .rv-selected .progress {
+        height: 13px;
+    }
+
+.rv-group-description, .rv-user-info {
+    border-left: 1px solid #eeeef4;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: justify;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+    .rv-group-description .ico {
+        font-size: 75px;
+        padding-left: 15px;
+    }
+
+    .rv-user-info i, .rv-user-info span {
+        padding-left: 15px;
+    }
+
+    .rv-group:hover, .rv-group-description:hover, .rv-user-info:hover {
+        background-color: #f2fcfb;
+        transition: 800ms all;
+    }
+
+
+        .rv-group:hover .ico, .rv-group-description:hover .ico, .rv-user-info:hover i {
+            color: #1dc9b7;
+            transform: scale(1.05);
+            transition: 800ms all;
+        }
+
+.rv-selected {
+    border-right: 1px solid #eeeef4;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+    .rv-selected:last-child {
+        border-right: none;
+    }
+
+    .rv-selected:hover {
+        background-color: #f2fcfb;
+        transition: 800ms all;
+    }
+
+        .rv-selected:hover .ico {
+            color: #1dc9b7;
+            transform: scale(1.05);
+            transition: 800ms all;
+        }
+
+    .rv-selected .ico {
+        line-height: 0;
+        font-size: 50px;
+        margin: auto;
+    }
+
+    .rv-selected .info {
+        text-align: end;
+    }
+
+        .rv-selected .info .header {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .rv-selected .info .number {
+            font-size: 24px;
+            font-weight: 400;
+            color: #1dc9b7;
+        }
+
+        .rv-selected .info .progress {
+        }
