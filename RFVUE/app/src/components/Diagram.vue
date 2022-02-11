@@ -416,7 +416,8 @@
     };
 </script>
 <style>
-    @import "https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.0.1/joint.css";
+    /*@import "https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.0.1/joint.css";*/
+    
     [mdg-ctx], [mdg-etx] {
         display: none;
         position: absolute;
