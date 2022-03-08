@@ -18,6 +18,7 @@ module.exports = {
         "site": true,
         "joint": true,
         "dagre": true,
+        //"jspreadsheet": true
         //"rfJoint": true,
         //"backbone": true
     },

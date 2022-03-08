@@ -7,6 +7,7 @@ namespace RFVUE.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-
+        [HttpGet]
+        public string Get() => "Working";
     }
 }

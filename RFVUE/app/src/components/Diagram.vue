@@ -404,7 +404,7 @@
                             'font-family': 'monospace'
                         },
                         text: {
-                            'font-size': 30,
+                            'font-size': letterSize,
                             'font-family': 'monospace'
                         }
                     },
