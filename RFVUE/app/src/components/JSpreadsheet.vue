@@ -13,8 +13,8 @@
         <v-btn class="float-right mr-2" color="primary" @click="download">Export</v-btn>
 
         <!--<v-alert type="error" elevation="5" max-width="250" dismissible="true">
-        I'm an error alert.
-    </v-alert>-->
+            I'm an error alert.
+        </v-alert>-->
         <v-snackbar v-model="snackbarToggle"
                     :timeout="snackbarTimeout"
                     absolute
@@ -48,8 +48,8 @@
         data() {
             return {
                 spreadsheetData: null,
-                spreadsheetStyle: null,
-                spreadsheetMerge: null,
+                spreadsheetStyle: {},
+                spreadsheetMerge: {},
                 spreadsheetHeaders: DataService.columns,
                 style: null,
                 snackbarToggle: false,
@@ -58,7 +58,7 @@
             };
         },
         async created() {
-            
+
         },
         async mounted() {
             const self = this;
@@ -68,7 +68,11 @@
                 //console.log(responseData)
                 this.snackbarText = responseData.Message;
                 this.snackbarToggle = true;
-                this.spreadsheetData = responseData.ApiPacket.PacketList
+                this.spreadsheetData =
+                    responseData.ApiPacket.PacketList.length > 0 ? responseData.ApiPacket.PacketList : [emptyData]
+
+                console.log(this.spreadsheetData)
+                
             }
 
             const responseStyleMerge = await rf.api.get('TaskStyle')
@@ -114,8 +118,8 @@
                             obj.deleteRow(parseInt(y), parseInt((obj.selectedCell[3] - obj.selectedCell[1]) + 1))
                         }
                     })
-                    
-                    
+
+
 
                     return items;
                 },
@@ -144,7 +148,7 @@
                     {
                         type: 'select',
                         k: 'font-family',
-                        v: ['Arial', 'monospace','Verdana']
+                        v: ['Arial', 'monospace', 'Verdana']
                     },
                     {
                         type: 'select',
@@ -231,7 +235,7 @@
                         td.TaskInfoId = null;
                     }
                     if (td.ProjectId === "") {
-                        td.ProjectId = taskData[index - 1].ProjectId ? taskData[index - 1].ProjectId : this.style.ProjectKey;
+                        td.ProjectId = taskData[index - 1].ProjectId ? taskData[index - 1].ProjectId : "RFVUETest001";
                     }
                 });
 
@@ -240,20 +244,27 @@
 
                 console.log(responseData);
 
-                const TaskStyle = {
-                    "TaskStyleId": this.style.TaskStyleId, // "046a6cef-65af-49d7-9eb8-ed67e2d6d330"
+                
 
-                    "ProjectKey": this.style.ProjectKey, // "BLOOM", "NEW ENTRY", "UPDATE"
+                const TaskStyle = {
+                    "TaskStyleId": this.style ? this.style.TaskStyleId : null, // "046a6cef-65af-49d7-9eb8-ed67e2d6d330"
+
+                    "ProjectKey": this.style ? this.style.ProjectKey : "RFVUETest001", // "BLOOM", "NEW ENTRY", "UPDATE"
 
                     "StyleJson": `${JSON.stringify(this.jspreadsheetObj.getStyle())}`, // "[{A1:'Color:#000'},{A2:'Color:#fff'}]"
 
                     "MergeJson": `${JSON.stringify(this.jspreadsheetObj.getMerge())}` // "[{A1:A9,{B2:C9}]"
                 }
-                
 
-                const responseStyle = await rf.api.post('TaskStyle', [ TaskStyle ])
+
+                const responseStyle = await rf.api.post('TaskStyle', [TaskStyle])
 
                 console.log(responseStyle);
+
+                if (responseData.status === 200 && responseStyle.status === 200) {
+                    this.snackbarText = responseData.data.Message;
+                    this.snackbarToggle = true;
+                }
                 //console.log(JSON.stringify(this.jspreadsheetObj.getMerge()));
                 //console.log(JSON.stringify(this.jspreadsheetObj.getStyle()));
             },
@@ -262,6 +273,24 @@
             }
         }
     }
+
+    const emptyData = {
+        TaskInfoId: "",
+        ProjectId: "RFVUETest001",
+        Func: "",
+        Type: "",
+        Model: "",
+        Task: "",
+        Sprint: "",
+        Developer: "",
+        ET: "",
+        CT: "",
+        Prototype: "",
+        Coding: "",
+        Today: "",
+        Comments: "",
+        Portfolio: ""
+    }
 </script>
 
 
@@ -269,7 +298,6 @@
 <style>
     #spreadsheet {
         font-size: 12px;
-        
     }
     /*.jexcel_content table {
         font-size: 12px;
